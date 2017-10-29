@@ -418,6 +418,32 @@
         </div>
     </section>
 
+    <!-- Location Section -->
+    <section id="location" class="pfblock pfblock-gray" style="padding-top: 80px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Localización</h2>
+                    <h3 class="section-subheading text-muted" style="margin-bottom: 50px;">
+                    El curso de formación tendrá lugar en Academia Octavio y las prácticas en las oficinas de LibreBit y Ultreia.</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="pfblock-header">
+          <div class="pfblock-line"></div>
+          <div class="pfblock-subtitle">
+          </div>
+        </div>
+        <div style="position:absolute; height: auto;width:100%">
+          <div style="height: 500px" id="leafmap"></div>
+        </div>
+        <div style="height: 340px; position: relative; z-index: -1"></div>
+        <small>
+          <a href="https://www.openstreetmap.org/node/5198629990#map=16/42.2259/-8.7317">Ver en un mapa más grande</a>
+        </small>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -615,6 +641,48 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
+
+    <!-- Map -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+		<script type="text/javascript">
+      $(function() {
+      var layer = L.tileLayer(
+      // 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
+      // 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+      'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'
+      , {
+      attribution: 'Map tiles by <a href="https://carto.com/attributions#basemaps">Carto</a>, under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. Data by <a href="https://www.openstreetmap.org/">OpenStreetMap</a>, under ODbL.'
+      });
+
+      var map = L.map('leafmap', {
+        scrollWheelZoom: false,
+        center: [42.2259, -8.7317],
+        zoom: 12
+      });
+
+      var marker = new L.marker([42.22594, -8.73720]).addTo(map);
+			marker.bindPopup(
+      "<h5><b>Academia Octavio</b></h5>" +
+      "Rúa da Coruña 33, 36208 - Vigo<br />" +
+      "<a target='_blank' href='https://www.openstreetmap.org/node/5198629990#map=16/42.2259/-8.7317'>Ver en OpenStreetMap</a>").openPopup();
+
+      var libreBitMarker = new L.marker([42.2364239, -8.7192123]).addTo(map);
+			libreBitMarker.bindPopup(
+      "<h5><b>LibreBit</b></h5>" +
+      "Calle Uruguay 8, planta 5ª, Oficina 8, 36201 - Vigo<br />" +
+      "<a target='_blank' href='https://www.openstreetmap.org/node/1386015763#map=16/42.2344/-8.7239'>Ver en OpenStreetMap</a>");
+
+      var ultreiaMarker = new L.marker([42.17041, -8.68268]).addTo(map);
+			ultreiaMarker.bindPopup(
+      "<h5><b>Ultreia Comunicaciones</b></h5>" +
+      "Centro Comercial Cidade Universitaria, Local B1B, 36310 - Vigo<br />" +
+      "<a target='_blank' href='https://www.openstreetmap.org/node/5198970634#map=17/42.16968/-8.68356'>Ver en OpenStreetMap</a>");
+
+      map.addLayer(layer);
+      })
+    </script>
 
 </body>
 
